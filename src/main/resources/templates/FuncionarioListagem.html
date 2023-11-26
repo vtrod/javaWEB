@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Funcionários da Empresa</title>
+  <style>
+    body {
+      background-color: #2C3E50; /* Azul escuro */
+      color: #ECF0F1; /* Branco gelo */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      background-color: #3498DB; /* Azul claro */
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav a {
+      color: #ECF0F1;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    table {
+      width: 60%;
+      margin: auto;
+      border-collapse: collapse;
+      border: 2px solid #3498DB; /* Azul claro */
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid #3498DB;
+    }
+
+    th {
+      background-color: #3498DB; /* Azul claro */
+      color: white;
+    }
+
+    .acao-btn {
+      background-color: #3498DB; /* Azul claro */
+      color: #2C3E50; /* Azul escuro */
+      border: 2px solid white;
+      border-radius: 20px;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .acao-btn:hover {
+      background-color: #2C3E50; /* Azul escuro */
+      color: white;
+    }
+
+    h2 {
+      text-align: center;
+      color: #3498DB;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="/funcionarios/listagem">Listagem</a>
+  ← Funcionários →
+  <a href="/funcionarios/cadastro">Cadastro</a>
+
+  <span style="margin: 0 30px;"></span> <!-- Espaço em branco entre os menus -->
+
+  Usuários →
+  <a href="/usuario/cadastro">Cadastro</a>
+</nav>
+
+<h2>Funcionários da Empresa</h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>Nome</th>
+    <th>Linguagem</th>
+    <th>Ação</th> <!-- Nova coluna para ação -->
+  </tr>
+  </thead>
+  <tbody>
+  <!-- Loop sobre os funcionários e exibe cada um na tabela -->
+  <!-- Loop sobre os funcionários e exibe cada um na tabela -->
+  <tr th:each="funcionario : ${funcionarios}">
+    <td th:text="${funcionario.nome}"></td>
+    <td th:text="${funcionario.linguagem}"></td>
+    <td>
+      <form th:action="@{/funcionarios/excluir}" th:object="${funcionario}" method="post" style="display: inline-block; margin-right: 5px;">
+        <input type="hidden" th:name="id" th:value="${funcionario.id}" />
+        <button type="submit" class="acao-btn">Excluir</button>
+      </form>
+      <a th:href="@{'/funcionarios/editar/' + ${funcionario.id}}" class="acao-btn" style="display: inline-block;">Editar</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

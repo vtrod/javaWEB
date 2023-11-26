@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Cadastre o Funcionário</title>
+    <style>
+        body {
+            background-color: #2C3E50 !important;
+            color: #ECF0F1 !important; /* Branco gelo */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        nav {
+            background-color: #3498DB; /* Azul claro */
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #ECF0F1;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        table {
+            width: 60%;
+            margin: auto;
+            border-collapse: collapse;
+            border: 2px solid #3498DB; /* Azul claro */
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #3498DB;
+        }
+
+        select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            color: #2C3E50;
+            background-color: #ECF0F1;
+            border: 1px solid #3498DB;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #3498DB;
+            color: #ECF0F1;
+            padding: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+            display: block;
+            margin: auto;
+            margin-top: 16px;
+        }
+
+        button:hover {
+            background-color: #2980B9; /* Azul mais escuro */
+            transform: scale(1.05);
+        }
+
+        h2 {
+            text-align: center;
+            color: #3498DB;
+            margin-top: 30px;
+        }
+    </style>
+   </head>
+<body>
+<nav>
+    <a href="/funcionarios/listagem">Listagem</a>
+    ← Funcionários →
+    <a href="/funcionarios/cadastro">Cadastro</a>
+
+    <span style="margin: 0 30px;"></span> <!-- Espaço em branco entre os menus -->
+
+   Usuários →
+    <a href="/usuario/cadastro">Cadastro</a>
+</nav>
+
+<div th:if="${mensagemErro}" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Opa!</strong>
+    <span th:text="${mensagemErro}"></span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<h2>Cadastre o Funcionário</h2>
+
+<form th:action="@{/funcionarios/cadastro}" th:object="${funcionario}" method="post">
+    <table>
+        <tr>
+            <th><label for="usuario">Nome do Usuário:</label></th>
+            <td>
+                <select id="usuario" name="usuario" th:field="*{usuario.id}" required>
+                    <option th:each="usuario : ${usuario}" th:value="${usuario.id}" th:text="${usuario.nome}"></option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <th><label for="linguagem">Linguagem:</label></th>
+            <td>
+                <select id="linguagem" name="linguagem" th:field="*{linguagem}" required>
+                    <option th:each="vaga : ${vaga}" th:value="${vaga.nome}" th:text="${vaga.nome}"></option>
+                </select>
+            </td>
+        </tr>
+    </table>
+
+    <br/>
+
+    <button type="submit">Cadastrar Funcionário</button>
+</form>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</bo>
+</html>

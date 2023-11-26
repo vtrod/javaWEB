@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário Thymeleaf</title>
+    <style>
+        body {
+            background-color: #2C3E50; /* Azul escuro */
+            color: #ECF0F1; /* Branco gelo */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #3498DB; /* Azul claro */
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #ECF0F1;
+            text-decoration: none;
+            margin: 0 30px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        table {
+            width: 60%;
+            margin: auto;
+            border-collapse: collapse;
+            border: 2px solid #3498DB; /* Azul claro */
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #3498DB;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            color: #2C3E50;
+            background-color: #ECF0F1;
+            border: 1px solid #3498DB;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #3498DB;
+            color: #ECF0F1;
+            padding: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+            display: block;
+            margin: auto;
+            margin-top: 16px;
+        }
+
+        button:hover {
+            background-color: #2980B9; /* Azul mais escuro */
+            transform: scale(1.05);
+        }
+
+        h2 {
+            text-align: center;
+            color: #3498DB;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <a href="/funcionarios/listagem">Listagem</a>
+    ← Funcionários →
+    <a href="/funcionarios/cadastro">Cadastro</a>
+
+    <span style="margin: 0 30px;"></span> <!-- Espaço em branco entre os menus -->
+
+     Usuários →
+    <a href="/usuario/cadastro">Cadastro</a>
+</nav>
+
+<h2>Formulário de Cadastro</h2>
+
+<form th:action="@{/usuario/cadastro}" th:object="${usuario}" method="post">
+    <table>
+        <tr>
+            <th><label for="nome">Nome:</label></th>
+            <td><input type="text" id="nome" name="nome" required th:field="*{nome}" placeholder="Digite o seu nome" /></td>
+        </tr>
+
+        <tr>
+            <th><label for="linguagem">Linguagem:</label></th>
+            <td><input type="text" id="linguagem" name="linguagem" required th:field="*{linguagem}" placeholder="Digite a linguagem de programação" /></td>
+        </tr>
+    </table>
+
+    <br/>
+
+    <button type="submit">Enviar</button>
+</form>
+</body>
+</html>
